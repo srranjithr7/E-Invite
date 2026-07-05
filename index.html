@@ -8,14 +8,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Inter:wght@300;400;500;600;700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=30120" />
+  <link rel="stylesheet" href="style.css?v=99991" />
 </head>
 <body>
   <div class="cover" id="cover" aria-label="Invitation cover">
     <div class="coverGate coverGateLeft" aria-hidden="true"></div>
     <div class="coverGate coverGateRight" aria-hidden="true"></div>
+    <div class="coverCenterLine" aria-hidden="true"></div>
     <div class="coverCard">
-      <div class="logo" aria-label="Ranjith and Sonaaly monogram"><span>R</span><i>&</i><span>S</span></div>
+      <div class="logo" aria-label="Ranjith and Sonaaly monogram"><b class="logoCenterLine" aria-hidden="true"></b><span>R</span><i>&</i><span>S</span></div>
       <p class="eyebrow">Wedding Invitation</p>
       <h1>Ranjith <span>and</span> Sonaaly</h1>
       <button class="primaryBtn" type="button" id="openInviteBtn">Open Invitation</button>
@@ -84,10 +85,10 @@
       </div>
     </section>
 
-    <section class="venue section" id="venue">
-      <div class="venueContent reveal">
+    <section class="venue section" id="venue" style="position:relative !important; display:flex !important; align-items:flex-end !important; justify-content:center !important; min-height:88vh !important; padding:0 14px 26px !important; overflow:hidden !important; box-sizing:border-box !important;">
+      <div class="venueContent reveal" style="position:relative !important; z-index:5 !important; width:100% !important; max-width:980px !important; margin:0 auto !important; padding:0 4px !important; text-align:center !important; box-sizing:border-box !important;">
         <p class="eyebrow">Venue</p>
-        <h2 class="sectionTitle">Dhuvathasantham<br />Convention Centre</h2>
+        <h2 class="sectionTitle venueTitleFixed"><span class="venueLine">Dhuvathasantham</span><br /><span class="venueLine">Convention Centre</span></h2>
         <p>Madurai, Tamil Nadu</p>
         <a class="linkBtn" href="https://maps.app.goo.gl/kYjnUuHdCrsawFqk9" target="_blank" rel="noopener">Open Map</a>
       </div>
@@ -149,6 +150,6 @@
   </main>
 
   <footer>Ranjith Rajagopal &amp; Sonaaly Sudharsanaa</footer>
-  <script src="script.js?v=30120"></script>
+  <script src="script.js?v=99991"></script>
 </body>
 </html>
