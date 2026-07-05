@@ -1446,197 +1446,123 @@ body.rsvpLocked{overflow:hidden;}
   }
 }
 
+/* CLEAN FIX: venue text bottom overlay + logo centred. No full-page line added. */
 
-/* === v30120: keep reference single centre cover line + requested venue positioning === */
-.presenceLine {
-  white-space: normal !important;
-  letter-spacing: .26em !important;
-}
-
-.cover .coverGateLeft::before,
-.cover .coverGateRight::before {
-  content: none !important;
-  display: none !important;
-}
-
+/* Venue image is now an actual image layer inside the venue section. */
 .venue {
   position: relative !important;
-  display: flex !important;
-  align-items: flex-end !important;
+  min-height: 86svh !important;
+  display: block !important;
+  padding: 0 !important;
+  overflow: hidden !important;
 }
-.venueContent {
+
+.venuePhoto {
+  position: absolute !important;
+  inset: 0 !important;
+  min-height: 100% !important;
   width: 100% !important;
-  padding-bottom: 40px !important;
-}
-@media (max-width: 760px) {
-  .venueContent {
-    padding-bottom: 30px !important;
-  }
+  background-size: cover !important;
+  background-position: center center !important;
+  z-index: 0 !important;
 }
 
-
-/* === final targeted fixes: no unwanted left-centre decoration, venue text at bottom, exact centre cover slit === */
-
-/* Remove the annoying static decorative cluster that was sitting on the left/centre of the image area. */
-.heroPhoto::before,
-.heroPhoto::after {
-  display: none !important;
-  content: none !important;
-  opacity: 0 !important;
-}
-
-/* Keep the venue photo as the full background, but anchor all venue text to the bottom of the image. */
-.venue {
-  display: flex !important;
-  align-items: flex-end !important;
-  justify-content: center !important;
-  min-height: 88vh !important;
-  padding: 80px 18px 38px !important;
-}
-
+/* Bottom overlay: text sits at bottom of venue image, not centre. */
 .venueContent {
-  align-self: flex-end !important;
-  margin-top: auto !important;
-  margin-bottom: 0 !important;
-  transform: none !important;
+  position: absolute !important;
+  left: 50% !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: 26px !important;
+  transform: translateX(-50%) !important;
+  z-index: 2 !important;
+
+  width: min(94vw, 720px) !important;
+  max-width: 720px !important;
+  margin: 0 !important;
+  padding: 18px 12px !important;
+  text-align: center !important;
+
+  display: block !important;
+  background: transparent !important;
 }
 
-@media (max-width: 760px) {
-  .venue {
-    min-height: 78vh !important;
-    padding: 64px 14px 30px !important;
-    align-items: flex-end !important;
-  }
+/* Stop "Convention Centre" from breaking one letter to next line. */
+.venueContent .sectionTitle {
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+  font-size: clamp(34px, 8.6vw, 60px) !important;
+  line-height: .94 !important;
+  max-width: none !important;
 }
 
-/* Make the front-page centre line one exact slit at 50%, between R and S. */
-.coverGate {
-  width: 50% !important;
+.venueContent p {
+  max-width: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
-.cover .coverGateLeft::after {
-  display: none !important;
-  content: none !important;
-}
-
-.cover .coverGateRight::after {
-  left: 0 !important;
-  width: 1.5px !important;
-  opacity: .72 !important;
-  transform: translateX(-.75px) !important;
-}
-
-/* === HARD FIX 20260705: DO NOT OVERRIDE === */
-.cover .coverGateLeft::after,
-.cover .coverGateRight::after,
-.cover .coverGateLeft::before,
-.cover .coverGateRight::before {
-  display:none !important;
-  content:none !important;
-  opacity:0 !important;
-}
-.coverCenterLine {
-  position:fixed !important;
-  left:50% !important;
-  top:0 !important;
-  bottom:0 !important;
-  width:2px !important;
-  transform:translateX(-1px) !important;
-  background:linear-gradient(180deg, transparent, rgba(212,175,106,.92), transparent) !important;
-  z-index:1 !important;
-  pointer-events:none !important;
-}
-.coverCard {
-  position:relative !important;
-  left:50% !important;
-  transform:translateX(-50%) !important;
-  width:min(92vw, 620px) !important;
-  margin:0 !important;
-  z-index:3 !important;
-}
-.cover.hide .coverCard {
-  transform:translateX(-50%) scale(.92) !important;
-}
-.cover .logo {
-  position:relative !important;
-  margin-left:auto !important;
-  margin-right:auto !important;
-  left:auto !important;
-  right:auto !important;
-}
-.cover .logoCenterLine {
-  position:absolute !important;
-  left:50% !important;
-  top:-26px !important;
-  bottom:-26px !important;
-  width:1.5px !important;
-  transform:translateX(-.75px) !important;
-  background:linear-gradient(180deg, transparent, rgba(139,106,54,.38), transparent) !important;
-  z-index:0 !important;
-  pointer-events:none !important;
-}
-.cover .logo span,
-.cover .logo i {
-  z-index:2 !important;
-}
-.cover .logo span:first-child { left:18px !important; right:auto !important; }
-.cover .logo span:last-child { right:18px !important; left:auto !important; }
-.cover .logo i { left:50% !important; right:auto !important; transform:translateX(-50%) !important; }
-
-.venue {
-  position:relative !important;
-  display:flex !important;
-  align-items:flex-end !important;
-  justify-content:center !important;
-  min-height:88vh !important;
-  padding:0 14px 26px !important;
-  overflow:hidden !important;
-  box-sizing:border-box !important;
-  background-size:cover !important;
-  background-position:center center !important;
-}
-.venueContent {
-  position:relative !important;
-  z-index:5 !important;
-  width:100% !important;
-  max-width:980px !important;
-  margin:0 auto !important;
-  padding:0 4px !important;
-  text-align:center !important;
-  box-sizing:border-box !important;
-  align-self:flex-end !important;
-  transform:none !important;
-}
-.venueTitleFixed,
-.venueContent .venueTitleFixed {
-  font-size:clamp(2.15rem, 8.2vw, 5.4rem) !important;
-  line-height:.92 !important;
-  letter-spacing:-.015em !important;
-  white-space:normal !important;
-  word-break:keep-all !important;
-  overflow-wrap:normal !important;
-  hyphens:none !important;
-  max-width:100% !important;
-  margin-left:auto !important;
-  margin-right:auto !important;
-}
-.venueLine {
-  display:inline-block !important;
-  white-space:nowrap !important;
-  word-break:keep-all !important;
-  overflow-wrap:normal !important;
-  max-width:100% !important;
-}
 .venueContent .sectionTitle::after,
-.venueContent h2::after { display:none !important; content:none !important; }
-@media (max-width:420px) {
-  .venueTitleFixed,
-  .venueContent .venueTitleFixed {
-    font-size:clamp(1.95rem, 7.8vw, 3.25rem) !important;
-    letter-spacing:-.035em !important;
-  }
+.venueContent h2::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Desktop must also use the same bottom overlay, not the old two-column centred venue layout. */
+@media (min-width: 760px) {
   .venue {
-    min-height:82vh !important;
-    padding-bottom:24px !important;
+    min-height: 86vh !important;
+    display: block !important;
+    grid-template-columns: none !important;
+  }
+  .venuePhoto {
+    position: absolute !important;
+    inset: 0 !important;
+    min-height: 100% !important;
+  }
+  .venueContent {
+    position: absolute !important;
+    left: 50% !important;
+    bottom: 36px !important;
+    transform: translateX(-50%) !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 18px 12px !important;
   }
 }
+
+/* Logo: keep the circular monogram centred and place R/S evenly around the exact middle. */
+.cover .logo {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  position: relative !important;
+}
+
+.cover .logo span:first-child {
+  left: 25% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+}
+
+.cover .logo span:last-child {
+  left: 75% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+}
+
+.cover .logo i {
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+}
+
+/* Remove any bad added centre-line element if an older browser cached it. */
+.inviteCenterLine,
+.centerLine,
+.coverCenterLine {
+  display: none !important;
+  content: none !important;
+}
+
