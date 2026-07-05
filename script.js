@@ -39,9 +39,8 @@
   function openInvite() {
     const cover = document.getElementById("cover");
     if (!cover || cover.classList.contains("hide")) return;
-    transitionSparks();
     cover.classList.add("hide");
-    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 850);
+    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 450);
   }
 
   function revealOnScroll() {
