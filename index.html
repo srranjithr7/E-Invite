@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f8efe2">
+  <title>Ranjith & Sonaaly Wedding Invitation</title>
+  <meta name="description" content="Wedding invitation for Ranjith and Sonaaly">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=1000">
+</head>
+<body>
+  <div class="cover" id="cover" aria-label="Invitation cover">
+    <div class="cover__bg" aria-hidden="true"></div>
+    <div class="cover__card">
+      <div class="monogram" aria-label="Ranjith and Sonaaly monogram">
+        <span>R</span><i>&amp;</i><span>S</span>
+      </div>
+      <p class="eyebrow">Wedding Invitation</p>
+      <h1>Ranjith <span>and</span> Sonaaly</h1>
+      <p class="cover__text">Together with their families invite you to celebrate their wedding.</p>
+      <button class="primary-btn" id="openInviteBtn" type="button">Open Invitation</button>
+      <p class="tap-note">Tap to begin</p>
+    </div>
+  </div>
+
+  <main id="mainContent">
+    <section class="hero section" id="home">
+      <div class="ornament ornament--top" aria-hidden="true"></div>
+      <div class="hero__content reveal">
+        <div class="monogram monogram--small" aria-hidden="true">
+          <span>R</span><i>&amp;</i><span>S</span>
+        </div>
+        <p class="eyebrow">Together with their families</p>
+        <h2>Ranjith <span>and</span> Sonaaly</h2>
+        <p class="hero__subtitle">invite you to celebrate their wedding</p>
+        <div class="hero__date">
+          <strong>13 September 2026</strong>
+          <span>Sunday · 10:00 AM · Madurai</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="date-section section" id="reveal">
+      <div class="section-head reveal">
+        <p class="eyebrow">Save the date</p>
+        <h2>Wedding Day</h2>
+      </div>
+
+      <div class="date-card reveal" id="dateCard">
+        <div class="date-card__inner">
+          <p class="month">September</p>
+          <p class="day">13</p>
+          <p class="year">2026</p>
+          <p class="time">Sunday · 10:00 AM</p>
+        </div>
+        <canvas id="scratchCanvas" aria-label="Scratch to reveal the date"></canvas>
+      </div>
+      <button class="text-btn reveal" id="revealDateBtn" type="button">Reveal date</button>
+    </section>
+
+    <section class="count-section section" id="countdown">
+      <div class="section-head reveal">
+        <p class="eyebrow">The celebration begins in</p>
+        <h2>Countdown</h2>
+      </div>
+      <div class="countdown reveal" aria-label="Wedding countdown">
+        <div class="count-box"><strong id="days">0</strong><span>Days</span></div>
+        <div class="count-box"><strong id="hours">0</strong><span>Hours</span></div>
+        <div class="count-box"><strong id="minutes">0</strong><span>Minutes</span></div>
+        <div class="count-box"><strong id="seconds">0</strong><span>Seconds</span></div>
+      </div>
+    </section>
+
+    <section class="events section" id="events">
+      <div class="section-head reveal">
+        <p class="eyebrow">Wedding details</p>
+        <h2>Events</h2>
+      </div>
+      <div class="event-list">
+        <article class="event-card reveal">
+          <p class="event-card__tag">Morning</p>
+          <h3>Wedding</h3>
+          <p><strong>Sunday, 13 September 2026</strong></p>
+          <p>10:00 AM</p>
+          <p>Dhuvathasantham Convention Centre<br>Madurai</p>
+          <a class="secondary-btn" href="https://maps.app.goo.gl/kYjnUuHdCrsawFqk9" target="_blank" rel="noopener">View location</a>
+        </article>
+
+        <article class="event-card reveal">
+          <p class="event-card__tag">Evening</p>
+          <h3>Reception</h3>
+          <p><strong>Sunday, 13 September 2026</strong></p>
+          <p>6:30 PM onwards</p>
+          <p>Dhuvathasantham Convention Centre<br>Madurai</p>
+          <a class="secondary-btn" href="https://maps.app.goo.gl/kYjnUuHdCrsawFqk9" target="_blank" rel="noopener">View location</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="venue section" id="venue">
+      <div class="venue-card reveal">
+        <p class="eyebrow">Venue</p>
+        <h2>Dhuvathasantham Convention Centre</h2>
+        <p>Madurai, Tamil Nadu</p>
+        <a class="primary-btn" href="https://maps.app.goo.gl/kYjnUuHdCrsawFqk9" target="_blank" rel="noopener">Open map</a>
+      </div>
+    </section>
+
+    <section class="rsvp section" id="rsvp">
+      <div class="rsvp-card reveal">
+        <p class="eyebrow">Kindly confirm</p>
+        <h2>RSVP</h2>
+        <p>Please confirm your presence through WhatsApp.</p>
+        <a class="primary-btn" href="https://wa.me/919585653566?text=Congratulations%20Ranjith%20and%20Sonaaly.%20I%20will%20attend%20the%20wedding." target="_blank" rel="noopener">WhatsApp RSVP</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Ranjith Rajagopal &amp; Sonaaly Sudharsanaa</p>
+  </footer>
+
+  <script src="script.js?v=1000"></script>
+</body>
+</html>
