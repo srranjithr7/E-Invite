@@ -214,7 +214,17 @@ button, a { -webkit-tap-highlight-color:transparent; }
   background-size:cover;
   background-position:center;
 }
-.venueContent { padding:64px 24px; text-align:center; }
+.venue{position:relative;display:flex;align-items:flex-end;min-height:520px;}
+.venueContent{
+width:100%;
+padding:0 24px 28px;
+text-align:center;
+display:flex;
+flex-direction:column;
+justify-content:flex-end;
+align-items:center;
+min-height:520px;
+}
 .venueContent p, .rsvpCard p { color:var(--soft); line-height:1.8; margin:0 auto 24px; max-width:460px; }
 .rsvp { padding:72px 22px; }
 .rsvpCard { width:min(100%, 520px); margin:0 auto; padding:42px 24px; text-align:center; }
