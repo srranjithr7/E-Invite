@@ -1473,3 +1473,55 @@ body.rsvpLocked{overflow:hidden;}
     padding-bottom: 30px !important;
   }
 }
+
+
+/* === final targeted fixes: no unwanted left-centre decoration, venue text at bottom, exact centre cover slit === */
+
+/* Remove the annoying static decorative cluster that was sitting on the left/centre of the image area. */
+.heroPhoto::before,
+.heroPhoto::after {
+  display: none !important;
+  content: none !important;
+  opacity: 0 !important;
+}
+
+/* Keep the venue photo as the full background, but anchor all venue text to the bottom of the image. */
+.venue {
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: center !important;
+  min-height: 88vh !important;
+  padding: 80px 18px 38px !important;
+}
+
+.venueContent {
+  align-self: flex-end !important;
+  margin-top: auto !important;
+  margin-bottom: 0 !important;
+  transform: none !important;
+}
+
+@media (max-width: 760px) {
+  .venue {
+    min-height: 78vh !important;
+    padding: 64px 14px 30px !important;
+    align-items: flex-end !important;
+  }
+}
+
+/* Make the front-page centre line one exact slit at 50%, between R and S. */
+.coverGate {
+  width: 50% !important;
+}
+
+.cover .coverGateLeft::after {
+  display: none !important;
+  content: none !important;
+}
+
+.cover .coverGateRight::after {
+  left: 0 !important;
+  width: 1.5px !important;
+  opacity: .72 !important;
+  transform: translateX(-.75px) !important;
+}
