@@ -1542,109 +1542,142 @@ body.rsvpLocked{overflow:hidden;}
 }
 
 
-/* === v30110: restore premium gold palette + remove extra front vertical lines === */
+/* === v30120: longer elegant opening animation only === */
 
-/* Restore warm premium gold/cream base */
-body {
-  background:
-    radial-gradient(circle at 12% 12%, rgba(212,175,106,.30), transparent 28%),
-    radial-gradient(circle at 86% 78%, rgba(139,106,54,.18), transparent 32%),
-    linear-gradient(135deg, #F8F1E6 0%, #EADBC4 46%, #CDBA9F 100%) !important;
+/* Keep existing design intact. Only improve the opening screen animation. */
+.cover {
+  overflow: hidden !important;
+  perspective: 1400px !important;
 }
 
-/* Front page curtain: remove extra centre vertical lines, keep only the split itself */
-.cover .coverGateLeft::after,
-.cover .coverGateRight::after,
+.coverGate {
+  transition:
+    transform 3.4s cubic-bezier(.76,0,.16,1),
+    filter 2.2s ease,
+    opacity 2.2s ease !important;
+  transform-style: preserve-3d !important;
+  will-change: transform, opacity, filter !important;
+}
+
+.cover.hide .coverGateLeft {
+  transform: translateX(-108%) rotateY(-14deg) !important;
+  filter: blur(1.5px) brightness(1.08) !important;
+  opacity: .96 !important;
+}
+
+.cover.hide .coverGateRight {
+  transform: translateX(108%) rotateY(14deg) !important;
+  filter: blur(1.5px) brightness(1.08) !important;
+  opacity: .96 !important;
+}
+
+.coverCard {
+  transition:
+    opacity 1.45s ease,
+    transform 2.1s cubic-bezier(.76,0,.16,1),
+    filter 1.8s ease !important;
+}
+
+.cover.hide .coverCard {
+  opacity: 0 !important;
+  transform: scale(.86) translateY(-8px) !important;
+  filter: blur(4px) !important;
+}
+
+/* Elegant gold glow from the centre while curtains open */
+.cover::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,239,190,.72), rgba(212,175,106,.18) 18%, transparent 46%) !important;
+  transform: scale(.72) !important;
+  transition:
+    opacity 2.4s ease,
+    transform 3.4s cubic-bezier(.76,0,.16,1) !important;
+}
+
+.cover.hide::before {
+  opacity: 1 !important;
+  transform: scale(1.38) !important;
+}
+
+/* Soft falling gold particles during opening */
+.cover::after {
+  content: "✦  ✧  ✦  ✧  ✦" !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 18% !important;
+  z-index: 4 !important;
+  pointer-events: none !important;
+  text-align: center !important;
+  letter-spacing: 1.6rem !important;
+  font-size: clamp(20px, 5vw, 42px) !important;
+  color: rgba(139,106,54,.58) !important;
+  opacity: 0 !important;
+  transform: translateY(0) scale(.92) !important;
+  filter: drop-shadow(0 10px 24px rgba(212,175,106,.26)) !important;
+  transition:
+    opacity 1.4s ease,
+    transform 3.2s cubic-bezier(.76,0,.16,1) !important;
+}
+
+.cover.hide::after {
+  opacity: .9 !important;
+  transform: translateY(120px) scale(1.12) !important;
+}
+
+/* Do not show the extra vertical centre slit lines */
 .cover .coverGateLeft::before,
-.cover .coverGateRight::before {
+.cover .coverGateRight::before,
+.cover .coverGateLeft::after,
+.cover .coverGateRight::after {
   display: none !important;
   content: none !important;
 }
 
-/* Front cover back to warm gold look */
-.coverGate,
-.cover {
-  background:
-    radial-gradient(circle at 50% 18%, rgba(212,175,106,.38), transparent 34%),
-    linear-gradient(135deg, #F8F1E6 0%, #E7D7BF 48%, #CDBA9F 100%) !important;
+/* Existing JS sparks become slower and more elegant */
+.transitionSpark {
+  width: 7px !important;
+  height: 7px !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle, rgba(255,239,190,.95), rgba(212,175,106,.65), transparent) !important;
+  box-shadow: 0 0 18px rgba(212,175,106,.62) !important;
+  animation-duration: 2.4s !important;
 }
 
-/* Keep curtain slow animation but cleaner */
-.coverGate {
-  transition: transform 2.45s cubic-bezier(.78,0,.16,1) !important;
+/* Give main page a smooth arrival */
+#mainContent {
+  animation: inviteArrive 1.35s ease both;
 }
 
-/* Date reveal warm gold/cream, not white */
-.dateReveal,
-.dateRevealWithVenueBg {
-  background:
-    radial-gradient(circle at 50% 22%, rgba(212,175,106,.26), transparent 36%),
-    linear-gradient(135deg, #F8F1E6 0%, #EADBC4 54%, #CDBA9F 100%) !important;
+@keyframes inviteArrive {
+  from {
+    opacity: .01;
+    transform: translateY(18px) scale(.985);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
 }
 
-/* Countdown: restore warm gold overlay instead of pale white */
-.countSection.countdownPhotoBg {
-  background-image:
-    linear-gradient(180deg, rgba(232,205,154,.16), rgba(205,186,159,.36)),
-    url("./countdown-hands.jpeg") !important;
-  background-size: cover !important;
-  background-position: center center !important;
-}
-
-.countSection.countdownPhotoBg::before {
-  background:
-    linear-gradient(180deg, rgba(248,241,230,.20), rgba(205,186,159,.34)),
-    radial-gradient(circle at 50% 55%, rgba(212,175,106,.24), rgba(246,239,227,.06) 72%) !important;
-}
-
-/* Venue: force uploaded PNG and warm gold overlay */
-.venue {
-  background-image:
-    linear-gradient(180deg, rgba(212,175,106,.16), rgba(205,186,159,.34)),
-    url("./venue-dhuvathasantham.png") !important;
-  background-size: cover !important;
-  background-position: center center !important;
-  background-repeat: no-repeat !important;
-}
-
-.venue::before {
-  background:
-    linear-gradient(180deg, rgba(248,241,230,.12), rgba(205,186,159,.26)),
-    radial-gradient(circle at 50% 55%, rgba(212,175,106,.20), rgba(246,239,227,.04) 72%) !important;
-}
-
-/* Cards and popup: return to gold/cream instead of white */
-.rsvpModalCard {
-  background:
-    radial-gradient(circle at 50% 0%, rgba(212,175,106,.30), transparent 34%),
-    linear-gradient(135deg, rgba(248,241,230,.96), rgba(231,216,195,.96), rgba(205,186,159,.94)) !important;
-}
-
-.rsvpOptions label,
-.rsvpSummary div,
-.rsvpField input {
-  background: rgba(246,239,227,.46) !important;
-}
-
-/* Text remains bold but not with white glow */
-.venueContent .sectionTitle,
-.venueContent .eyebrow,
-.venueContent p {
-  text-shadow: none !important;
-  color: #071f1c !important;
-}
-
-/* Mobile same warm palette */
-@media (max-width:760px) {
-  .venue {
-    background-image:
-      linear-gradient(180deg, rgba(212,175,106,.14), rgba(205,186,159,.38)),
-      url("./venue-dhuvathasantham.png") !important;
+@media (max-width: 760px) {
+  .cover.hide .coverGateLeft {
+    transform: translateX(-112%) rotateY(-10deg) !important;
   }
 
-  .countSection.countdownPhotoBg::before,
-  .venue::before {
-    background:
-      linear-gradient(180deg, rgba(248,241,230,.22), rgba(205,186,159,.42)) !important;
+  .cover.hide .coverGateRight {
+    transform: translateX(112%) rotateY(10deg) !important;
+  }
+
+  .cover::after {
+    letter-spacing: .9rem !important;
   }
 }
