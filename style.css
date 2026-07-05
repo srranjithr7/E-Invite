@@ -1512,15 +1512,3 @@ body.rsvpLocked{overflow:hidden;}
 .rsvpDuplicateNote {
   color: var(--accent) !important;
 }
-
-
-/* Bottom align venue text */
-.venue{
- position:relative;
- display:flex;
- align-items:flex-end !important;
-}
-.venueContent{
- width:100%;
- padding-bottom:40px;
-}
