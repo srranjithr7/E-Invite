@@ -29,7 +29,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: Inter, Arial, sans-serif;
-  overflow-x: auto;
+  overflow-x: scroll;
 }
 
 body::before {
@@ -1279,7 +1279,7 @@ footer {
    ========================================================= */
 @media screen and (max-width: 900px) {
   html {
-    overflow-x: auto !important;
+    overflow-x: scroll !important;
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
     width: 100% !important;
@@ -1301,9 +1301,9 @@ footer {
   }
 
   .cover {
-    width: 100vw !important;
-    min-width: 100vw !important;
-    max-width: 100vw !important;
+   width: 1200px!important;
+    min-width: 1200px !important;
+    max-width: none !important;
   }
 
   .navDots {
@@ -1363,3 +1363,26 @@ footer {
   /* small visual cue, because iPhone Safari/WhatsApp usually hides real scrollbars */
   body::selection { background: transparent; }
 }
+html{
+    overflow-x:auto !important;
+    overflow-y:auto !important;
+    -webkit-overflow-scrolling:touch;
+}
+
+body{
+    overflow-x:auto !important;
+    min-width:1200px;
+}
+
+@media (max-width:900px){
+
+    body{
+        width:1200px !important;
+    }
+
+    html{
+        overflow-x:scroll !important;
+    }
+}
+
+
