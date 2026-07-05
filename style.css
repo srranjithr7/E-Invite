@@ -1540,3 +1540,111 @@ body.rsvpLocked{overflow:hidden;}
       url("./venue-dhuvathasantham.png") !important;
   }
 }
+
+
+/* === v30110: restore premium gold palette + remove extra front vertical lines === */
+
+/* Restore warm premium gold/cream base */
+body {
+  background:
+    radial-gradient(circle at 12% 12%, rgba(212,175,106,.30), transparent 28%),
+    radial-gradient(circle at 86% 78%, rgba(139,106,54,.18), transparent 32%),
+    linear-gradient(135deg, #F8F1E6 0%, #EADBC4 46%, #CDBA9F 100%) !important;
+}
+
+/* Front page curtain: remove extra centre vertical lines, keep only the split itself */
+.cover .coverGateLeft::after,
+.cover .coverGateRight::after,
+.cover .coverGateLeft::before,
+.cover .coverGateRight::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* Front cover back to warm gold look */
+.coverGate,
+.cover {
+  background:
+    radial-gradient(circle at 50% 18%, rgba(212,175,106,.38), transparent 34%),
+    linear-gradient(135deg, #F8F1E6 0%, #E7D7BF 48%, #CDBA9F 100%) !important;
+}
+
+/* Keep curtain slow animation but cleaner */
+.coverGate {
+  transition: transform 2.45s cubic-bezier(.78,0,.16,1) !important;
+}
+
+/* Date reveal warm gold/cream, not white */
+.dateReveal,
+.dateRevealWithVenueBg {
+  background:
+    radial-gradient(circle at 50% 22%, rgba(212,175,106,.26), transparent 36%),
+    linear-gradient(135deg, #F8F1E6 0%, #EADBC4 54%, #CDBA9F 100%) !important;
+}
+
+/* Countdown: restore warm gold overlay instead of pale white */
+.countSection.countdownPhotoBg {
+  background-image:
+    linear-gradient(180deg, rgba(232,205,154,.16), rgba(205,186,159,.36)),
+    url("./countdown-hands.jpeg") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+}
+
+.countSection.countdownPhotoBg::before {
+  background:
+    linear-gradient(180deg, rgba(248,241,230,.20), rgba(205,186,159,.34)),
+    radial-gradient(circle at 50% 55%, rgba(212,175,106,.24), rgba(246,239,227,.06) 72%) !important;
+}
+
+/* Venue: force uploaded PNG and warm gold overlay */
+.venue {
+  background-image:
+    linear-gradient(180deg, rgba(212,175,106,.16), rgba(205,186,159,.34)),
+    url("./venue-dhuvathasantham.png") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.venue::before {
+  background:
+    linear-gradient(180deg, rgba(248,241,230,.12), rgba(205,186,159,.26)),
+    radial-gradient(circle at 50% 55%, rgba(212,175,106,.20), rgba(246,239,227,.04) 72%) !important;
+}
+
+/* Cards and popup: return to gold/cream instead of white */
+.rsvpModalCard {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(212,175,106,.30), transparent 34%),
+    linear-gradient(135deg, rgba(248,241,230,.96), rgba(231,216,195,.96), rgba(205,186,159,.94)) !important;
+}
+
+.rsvpOptions label,
+.rsvpSummary div,
+.rsvpField input {
+  background: rgba(246,239,227,.46) !important;
+}
+
+/* Text remains bold but not with white glow */
+.venueContent .sectionTitle,
+.venueContent .eyebrow,
+.venueContent p {
+  text-shadow: none !important;
+  color: #071f1c !important;
+}
+
+/* Mobile same warm palette */
+@media (max-width:760px) {
+  .venue {
+    background-image:
+      linear-gradient(180deg, rgba(212,175,106,.14), rgba(205,186,159,.38)),
+      url("./venue-dhuvathasantham.png") !important;
+  }
+
+  .countSection.countdownPhotoBg::before,
+  .venue::before {
+    background:
+      linear-gradient(180deg, rgba(248,241,230,.22), rgba(205,186,159,.42)) !important;
+  }
+}
