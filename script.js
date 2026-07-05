@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  const weddingDate = new Date("2026-09-13T10:00:00+05:30").getTime();
+  const weddingDate = new Date("2026-09-13T10:30:00+05:30").getTime();
   let canvas, box, ctx, drawing = false, revealed = false, scratchCount = 0;
 
   function setText(id, value) {

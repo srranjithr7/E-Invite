@@ -1447,68 +1447,29 @@ body.rsvpLocked{overflow:hidden;}
 }
 
 
-/* === v30090: longer cinematic opening + editable RSVP wording === */
+/* === v30120: keep reference single centre cover line + requested venue positioning === */
 .presenceLine {
   white-space: normal !important;
   letter-spacing: .26em !important;
 }
 
-/* Slower, more dramatic curtain opening */
-.coverGate {
-  transition: transform 2.65s cubic-bezier(.78,0,.16,1) !important;
-}
-
-.coverCard {
-  transition: opacity 1.15s ease, transform 1.55s cubic-bezier(.78,0,.16,1), filter 1.55s ease !important;
-}
-
-.cover.hide .coverCard {
-  opacity: 0 !important;
-  transform: scale(.88) !important;
-  filter: blur(3px) !important;
-}
-
 .cover .coverGateLeft::before,
 .cover .coverGateRight::before {
-  content: "" !important;
-  position: absolute !important;
-  top: 0 !important;
-  bottom: 0 !important;
-  width: 70px !important;
-  opacity: .85 !important;
-  background: linear-gradient(90deg, rgba(255,255,255,.36), rgba(212,175,106,.22), transparent) !important;
-  transform: translateX(0) !important;
-  transition: transform 2.65s cubic-bezier(.78,0,.16,1), opacity 1.5s ease !important;
+  content: none !important;
+  display: none !important;
 }
 
-.cover .coverGateLeft::before {
-  right: 0 !important;
+.venue {
+  position: relative !important;
+  display: flex !important;
+  align-items: flex-end !important;
 }
-
-.cover .coverGateRight::before {
-  left: 0 !important;
-  transform: scaleX(-1) !important;
+.venueContent {
+  width: 100% !important;
+  padding-bottom: 40px !important;
 }
-
-.cover.hide .coverGateLeft::before {
-  transform: translateX(-120px) !important;
-  opacity: 0 !important;
-}
-
-.cover.hide .coverGateRight::before {
-  transform: translateX(120px) scaleX(-1) !important;
-  opacity: 0 !important;
-}
-
-.cover::before,
-.cover::after {
-  transition: transform 2.65s cubic-bezier(.78,0,.16,1), opacity 1.35s ease !important;
-}
-
-.transitionSpark {
-  animation-duration: 2.1s !important;
-}
-
-.rsvpDuplicateNote {
-  color: var(--accent) !important;
+@media (max-width: 760px) {
+  .venueContent {
+    padding-bottom: 30px !important;
+  }
 }
