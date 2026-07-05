@@ -1667,3 +1667,35 @@ body::after {
   box-shadow: none !important;
 }
 
+
+
+/* ===== VENUE BOTTOM FIX ===== */
+.venue{
+ display:flex !important;
+ flex-direction:column !important;
+ justify-content:flex-end !important;
+ align-items:center !important;
+ padding:0 20px 8px 20px !important;
+}
+.venue::before{
+ display:none !important;
+ content:none !important;
+}
+.venueContent{
+ margin-top:auto !important;
+ margin-bottom:8px !important;
+ padding:0 !important;
+ background:transparent !important;
+ border:none !important;
+ box-shadow:none !important;
+ backdrop-filter:none !important;
+}
+.venueContent .sectionTitle{
+ font-size:clamp(2.9rem,9vw,5.8rem)!important;
+ white-space:nowrap!important;
+ line-height:.95!important;
+ margin-bottom:6px!important;
+}
+.venueContent p{
+ font-size:1.25rem!important;
+}
