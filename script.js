@@ -39,8 +39,9 @@
   function openInvite() {
     const cover = document.getElementById("cover");
     if (!cover || cover.classList.contains("hide")) return;
+    transitionSparks();
     cover.classList.add("hide");
-    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 450);
+    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100);
   }
 
   function revealOnScroll() {
@@ -167,7 +168,7 @@
   window.finishReveal = finishReveal;
 })();
 
-/* RSVP popup - Google Sheet submit + JSONP live count retrieval + editable response */
+/* RSVP popup - Google Sheet counts + editable response from same device */
 document.addEventListener("DOMContentLoaded", () => {
   const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzY9aNDRp4SMArkPDgAVMgvN9BLGt2CVyB4XAfKBTqcSSwZtqrLqlMiuTBSHGwzUNEz9w/exec";
 
@@ -194,47 +195,30 @@ document.addEventListener("DOMContentLoaded", () => {
     if (maybeCount) maybeCount.textContent = counts.maybe ?? 0;
   }
 
-  function loadCountsFromSheet() {
-    return new Promise((resolve) => {
-      const callbackName = "rsvpCountsCallback_" + Date.now() + "_" + Math.floor(Math.random() * 10000);
-      const scriptTag = document.createElement("script");
-
-      window[callbackName] = (data) => {
-        try {
-          if (data && data.result === "success" && data.counts) {
-            setCounts(data.counts);
-          }
-        } finally {
-          delete window[callbackName];
-          scriptTag.remove();
-          resolve();
-        }
-      };
-
-      scriptTag.onerror = () => {
-        delete window[callbackName];
-        scriptTag.remove();
-        resolve();
-      };
-
-      scriptTag.src = RSVP_ENDPOINT + "?action=counts&callback=" + encodeURIComponent(callbackName) + "&v=" + Date.now();
-      document.body.appendChild(scriptTag);
-    });
+  async function loadCountsFromSheet() {
+    try {
+      const res = await fetch(RSVP_ENDPOINT + "?action=counts&v=" + Date.now(), {
+        method: "GET",
+        cache: "no-store"
+      });
+      const data = await res.json();
+      if (data && data.result === "success" && data.counts) setCounts(data.counts);
+    } catch (err) {
+      console.warn("RSVP count fetch failed", err);
+    }
   }
 
   function fillSavedResponse() {
     const saved = getSavedResponse();
     const submitBtn = form?.querySelector(".rsvpSubmit");
+
     if (!form || !submitBtn) return;
 
     if (saved) {
       const nameEl = document.getElementById("guestName");
       if (nameEl) nameEl.value = saved.name || "";
-
-      const radios = form.querySelectorAll('input[name="attendance"]');
-      radios.forEach((radio) => {
-        radio.checked = radio.value === saved.attendance;
-      });
+      const radio = form.querySelector('input[name="attendance"][value="' + CSS.escape(saved.attendance || "") + '"]');
+      if (radio) radio.checked = true;
 
       if (duplicateNote) duplicateNote.hidden = false;
       submitBtn.disabled = false;
@@ -322,12 +306,11 @@ document.addEventListener("DOMContentLoaded", () => {
           submittedAtDisplay: response.submittedAtDisplay
         }));
 
-        setTimeout(loadCountsFromSheet, 1500);
+        setTimeout(loadCountsFromSheet, 1200);
 
         if (submittedTime) submittedTime.textContent = (saved ? "Updated: " : "Submitted: ") + response.submittedAtDisplay;
         if (formView) formView.hidden = true;
         if (thanksView) thanksView.hidden = false;
-
         if (submitBtn) {
           submitBtn.classList.remove("loading");
           submitBtn.disabled = false;
