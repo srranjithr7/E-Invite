@@ -10,3 +10,207 @@ a{color:inherit}button,a{-webkit-tap-highlight-color:transparent}.section{positi
 .events{background:linear-gradient(135deg,#F8F1E6 0%,#EADBC4 100%)}.eventGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:32px}.eventCard{border:1px solid rgba(139,106,54,.24);border-radius:28px;padding:28px 18px;background:rgba(246,239,227,.56);box-shadow:0 20px 54px rgba(72,52,30,.10)}.eventCard h3{font-family:Italiana,serif;font-size:48px;color:var(--deep);margin-bottom:16px}.eventCard p{line-height:1.7;color:var(--soft);font-weight:600}.eventCard .linkBtn{margin-top:18px}.venue{background-image:linear-gradient(180deg,rgba(246,239,227,.16),rgba(246,239,227,.34)),url("venue-dhuvathasantham.png")}.venueContent .sectionTitle{font-size:clamp(2.95rem,8.7vw,6.5rem);font-weight:1000;color:#071f1c;line-height:.92;overflow-wrap:anywhere}.venueContent .eyebrow,.venueContent p{color:#071f1c;font-weight:1000}.venueContent p{font-size:clamp(1.05rem,2.6vw,1.55rem);margin:18px auto}.venueContent .linkBtn{background:rgba(246,239,227,.78)}
 .rsvp{min-height:80vh;display:grid;place-items:center;padding:70px 18px}.rsvpCard{width:min(92vw,760px);text-align:center;padding:48px 22px;border-radius:30px;background:rgba(246,239,227,.58);border:1px solid rgba(139,106,54,.24);box-shadow:0 24px 70px rgba(72,52,30,.12)}.rsvpCard p:not(.eyebrow){max-width:520px;margin:16px auto 0;color:var(--soft);font-weight:700;line-height:1.7}.rsvpCard .primaryBtn{margin-top:22px}.presenceLine{letter-spacing:.26em!important}.rsvpModal{position:fixed;inset:0;z-index:2000;display:none;align-items:center;justify-content:center;padding:22px}.rsvpModal.open{display:flex}.rsvpModalBackdrop{position:absolute;inset:0;background:rgba(14,47,43,.42);backdrop-filter:blur(7px)}.rsvpModalCard{position:relative;z-index:1;width:min(92vw,520px);max-height:92svh;overflow:auto;padding:34px 24px 28px;border-radius:30px;background:radial-gradient(circle at 50% 0%,rgba(212,175,106,.26),transparent 34%),linear-gradient(135deg,rgba(248,241,230,.96),rgba(231,216,195,.96));border:1px solid rgba(139,106,54,.28);box-shadow:0 34px 100px rgba(0,0,0,.28);text-align:center}.rsvpClose{position:absolute;top:12px;right:16px;width:38px;height:38px;border:0;border-radius:999px;background:rgba(246,239,227,.66);color:var(--deep);font-size:28px;cursor:pointer}.rsvpModalCard h2{font-family:Italiana,serif;font-size:clamp(2.8rem,10vw,4.6rem);line-height:.95;font-weight:700;color:var(--deep);margin:8px 0 24px}.rsvpField{display:block;text-align:left;margin:18px 0 20px}.rsvpField span,.rsvpOptions p{display:block;color:var(--accent);font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px}.rsvpField input{width:100%;min-height:52px;border-radius:16px;border:1px solid rgba(139,106,54,.32);background:rgba(255,255,255,.48);padding:0 16px;font:700 16px Inter,Arial,sans-serif;color:var(--deep);outline:none}.rsvpOptions{text-align:left;margin:18px 0 24px}.rsvpOptions label{display:flex;align-items:center;gap:12px;min-height:48px;margin:10px 0;padding:12px 14px;border:1px solid rgba(139,106,54,.24);border-radius:16px;background:rgba(255,255,255,.34);color:var(--deep);font-weight:800;cursor:pointer}.rsvpOptions input{width:18px;height:18px;accent-color:var(--deep)}.rsvpSummary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0 0}.rsvpSummary div{padding:12px 8px;border-radius:16px;background:rgba(255,255,255,.34);border:1px solid rgba(139,106,54,.22)}.rsvpSummary strong{display:block;font-family:"Nunito Sans",Inter,Arial,sans-serif;font-size:1.75rem;line-height:1;font-weight:900;color:var(--deep)}.rsvpSummary span{display:block;margin-top:6px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:900;color:var(--accent)}.rsvpDuplicateNote,.rsvpSubmittedTime{margin-top:14px;font-size:12px;font-weight:800;color:var(--accent)}body.rsvpLocked{overflow:hidden}footer{padding:28px 18px 40px;text-align:center;color:var(--soft);font-size:12px;letter-spacing:.12em;text-transform:uppercase}.spark,.luxPiece{position:fixed;pointer-events:none;z-index:3000}.spark{width:8px;height:8px;border-radius:50%;background:var(--gold);animation:sparkFade .85s ease forwards}.luxPiece{top:-20px;color:var(--gold);animation:fall linear forwards}@keyframes sparkFade{to{opacity:0;transform:scale(2)}}@keyframes fall{to{transform:translate(var(--drift),110vh) rotate(var(--rot));opacity:0}}
 @media(max-width:760px){.hero{display:flex;flex-direction:column;min-height:100svh}.heroContent{min-height:auto;padding:38px 18px 18px}.heroContent h2{font-size:clamp(58px,18vw,92px)}.heroPhoto{width:calc(100% - 28px);height:580px;min-height:0;margin:0 auto 36px;border-radius:30px}.sectionInner{padding:72px 0}.scratchBox{width:min(94vw,560px);min-height:340px}.dateCard{min-height:310px}.countSection.countdownPhotoBg,.venue{width:calc(100% - 20px);margin:14px auto;border-radius:28px;min-height:78vh;padding:72px 14px}.countdown{grid-template-columns:repeat(4,minmax(0,1fr))}.countItem{padding:12px 4px}.countItem strong{font-size:clamp(1.65rem,8vw,2.55rem)}.countItem span{font-size:9px;letter-spacing:.08em}.eventGrid{grid-template-columns:1fr}.venueContent .sectionTitle{font-size:clamp(2.35rem,9.8vw,3.75rem)}.coverGate{transition:transform 1.9s cubic-bezier(.76,0,.24,1)}}
+
+
+/* === v40010: real-flower style bouquets + event order/time + lower venue text === */
+
+/* Remove older bubble/stem-looking floral overlays */
+.hero::before,
+.hero::after,
+.heroPhoto::before,
+.heroPhoto::after,
+.cover::before,
+.cover::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Actual bouquet-style floral clusters built with layered petals, not stem/bubble pattern */
+.heroFloralBouquet {
+  display: none;
+}
+
+.hero,
+.cover {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.heroContent::before,
+.heroContent::after,
+.coverCard::before,
+.coverCard::after {
+  pointer-events: none !important;
+}
+
+/* Keep original divider lines on cover card but floral comes from background pseudo on coverCard */
+.coverCard {
+  position: relative !important;
+}
+
+.coverCard > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Premium real-flower bouquet at top of cover card */
+.coverCard::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  width: 330px !important;
+  height: 210px !important;
+  top: -72px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 1 !important;
+  margin: 0 !important;
+  background:
+    radial-gradient(ellipse at 50% 42%, #fffaf0 0 9%, transparent 10%),
+    radial-gradient(ellipse at 43% 46%, #fffaf0 0 7%, transparent 8%),
+    radial-gradient(ellipse at 57% 46%, #fffaf0 0 7%, transparent 8%),
+    radial-gradient(ellipse at 47% 34%, #f0d7ad 0 6%, transparent 7%),
+    radial-gradient(ellipse at 53% 34%, #f0d7ad 0 6%, transparent 7%),
+
+    radial-gradient(ellipse at 28% 48%, #fff7e8 0 8%, transparent 9%),
+    radial-gradient(ellipse at 22% 54%, #fffaf0 0 7%, transparent 8%),
+    radial-gradient(ellipse at 34% 58%, #e8c995 0 6%, transparent 7%),
+    radial-gradient(ellipse at 72% 48%, #fff7e8 0 8%, transparent 9%),
+    radial-gradient(ellipse at 78% 54%, #fffaf0 0 7%, transparent 8%),
+    radial-gradient(ellipse at 66% 58%, #e8c995 0 6%, transparent 7%),
+
+    radial-gradient(ellipse at 18% 70%, rgba(78,112,77,.42) 0 8%, transparent 9%),
+    radial-gradient(ellipse at 31% 78%, rgba(78,112,77,.34) 0 7%, transparent 8%),
+    radial-gradient(ellipse at 82% 70%, rgba(78,112,77,.42) 0 8%, transparent 9%),
+    radial-gradient(ellipse at 69% 78%, rgba(78,112,77,.34) 0 7%, transparent 8%);
+  filter: drop-shadow(0 18px 28px rgba(72,52,30,.16));
+  opacity: .95 !important;
+}
+
+/* Replace bottom cover divider with a clean gold line */
+.coverCard::after {
+  content: "" !important;
+  display: block !important;
+  position: static !important;
+  height: 1px !important;
+  width: min(74vw, 480px) !important;
+  margin: 28px auto 0 !important;
+  background: linear-gradient(90deg, transparent, rgba(139,106,54,.62), transparent) !important;
+}
+
+/* Hero/photo flower bouquets on both sides of the first image */
+.heroPhoto {
+  position: relative !important;
+}
+
+.heroPhoto .unused { display: none; }
+
+.heroPhoto::before,
+.heroPhoto::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  z-index: 4 !important;
+  pointer-events: none !important;
+  width: 250px !important;
+  height: 310px !important;
+  top: 26px !important;
+  opacity: .96 !important;
+  filter: drop-shadow(0 18px 34px rgba(72,52,30,.18));
+  background:
+    radial-gradient(ellipse at 48% 26%, #fffaf0 0 10%, transparent 11%),
+    radial-gradient(ellipse at 38% 33%, #fff7e8 0 8%, transparent 9%),
+    radial-gradient(ellipse at 58% 36%, #fffaf0 0 8%, transparent 9%),
+    radial-gradient(ellipse at 46% 44%, #f0d7ad 0 7%, transparent 8%),
+    radial-gradient(ellipse at 62% 50%, #fff4df 0 7%, transparent 8%),
+    radial-gradient(ellipse at 32% 52%, #e8c995 0 6%, transparent 7%),
+    radial-gradient(ellipse at 50% 64%, rgba(78,112,77,.42) 0 10%, transparent 11%),
+    radial-gradient(ellipse at 36% 72%, rgba(78,112,77,.34) 0 8%, transparent 9%),
+    radial-gradient(ellipse at 66% 72%, rgba(78,112,77,.34) 0 8%, transparent 9%);
+  mask-image: radial-gradient(ellipse at 50% 45%, #000 0 58%, transparent 78%);
+}
+
+.heroPhoto::before {
+  left: -74px !important;
+  transform: rotate(-16deg) !important;
+}
+
+.heroPhoto::after {
+  right: -78px !important;
+  transform: scaleX(-1) rotate(-16deg) !important;
+}
+
+/* Add a richer top bouquet over the first page header area */
+.heroContent {
+  position: relative !important;
+}
+
+.heroContent::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 20px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: min(82vw, 420px) !important;
+  height: 150px !important;
+  z-index: 0 !important;
+  opacity: .82 !important;
+  background:
+    radial-gradient(ellipse at 50% 35%, #fffaf0 0 8%, transparent 9%),
+    radial-gradient(ellipse at 40% 43%, #fff7e8 0 7%, transparent 8%),
+    radial-gradient(ellipse at 60% 43%, #fff7e8 0 7%, transparent 8%),
+    radial-gradient(ellipse at 30% 58%, #e8c995 0 6%, transparent 7%),
+    radial-gradient(ellipse at 70% 58%, #e8c995 0 6%, transparent 7%),
+    radial-gradient(ellipse at 22% 72%, rgba(78,112,77,.36) 0 7%, transparent 8%),
+    radial-gradient(ellipse at 78% 72%, rgba(78,112,77,.36) 0 7%, transparent 8%);
+  filter: drop-shadow(0 14px 22px rgba(72,52,30,.12));
+}
+
+.heroContent > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Venue text slightly lower on the image */
+.venue {
+  align-items: end !important;
+  padding-top: 80px !important;
+  padding-bottom: 13vh !important;
+}
+
+.venueContent {
+  transform: translateY(28px) !important;
+}
+
+@media (max-width: 760px) {
+  .heroPhoto::before,
+  .heroPhoto::after {
+    width: 185px !important;
+    height: 240px !important;
+    top: 18px !important;
+    opacity: .90 !important;
+  }
+
+  .heroPhoto::before {
+    left: -64px !important;
+  }
+
+  .heroPhoto::after {
+    right: -66px !important;
+  }
+
+  .coverCard::before {
+    width: 260px !important;
+    height: 170px !important;
+    top: -58px !important;
+  }
+
+  .venue {
+    align-items: end !important;
+    padding-bottom: 10vh !important;
+  }
+
+  .venueContent {
+    transform: translateY(16px) !important;
+  }
+}
