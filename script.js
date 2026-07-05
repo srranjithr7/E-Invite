@@ -1,16 +1,8 @@
 (function () {
-  'use strict';
+  "use strict";
 
-  const weddingDate = new Date('2026-09-13T10:00:00+05:30').getTime();
-  const cover = document.getElementById('cover');
-  const openBtn = document.getElementById('openInviteBtn');
-  const dateCard = document.getElementById('dateCard');
-  const revealBtn = document.getElementById('revealDateBtn');
-  const canvas = document.getElementById('scratchCanvas');
-  let ctx = null;
-  let drawing = false;
-  let revealed = false;
-  let scratchMoves = 0;
+  const weddingDate = new Date("2026-09-13T10:00:00+05:30").getTime();
+  let canvas, box, ctx, drawing = false, revealed = false, scratchCount = 0;
 
   function setText(id, value) {
     const el = document.getElementById(id);
@@ -20,140 +12,338 @@
   function updateCountdown() {
     const diff = weddingDate - Date.now();
     if (diff <= 0) {
-      setText('days', 0);
-      setText('hours', 0);
-      setText('minutes', 0);
-      setText('seconds', 0);
+      setText("days", 0); setText("hours", 0); setText("minutes", 0); setText("seconds", 0);
       return;
     }
-    setText('days', Math.floor(diff / 86400000));
-    setText('hours', Math.floor((diff % 86400000) / 3600000));
-    setText('minutes', Math.floor((diff % 3600000) / 60000));
-    setText('seconds', Math.floor((diff % 60000) / 1000));
+    setText("days", Math.floor(diff / 86400000));
+    setText("hours", Math.floor((diff % 86400000) / 3600000));
+    setText("minutes", Math.floor((diff % 3600000) / 60000));
+    setText("seconds", Math.floor((diff % 60000) / 1000));
+  }
+
+  function transitionSparks() {
+    for (let i = 0; i < 38; i++) {
+      const s = document.createElement("div");
+      s.className = "transitionSpark";
+      s.style.left = "50vw";
+      s.style.top = "50vh";
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 90 + Math.random() * 260;
+      s.style.setProperty("--tx", Math.cos(angle) * dist + "px");
+      s.style.setProperty("--ty", Math.sin(angle) * dist + "px");
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 1300);
+    }
   }
 
   function openInvite() {
-    if (!cover || cover.classList.contains('hide')) return;
-    cover.classList.add('hide');
-    setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 120);
-    launchSparkles(36);
+    const cover = document.getElementById("cover");
+    if (!cover || cover.classList.contains("hide")) return;
+    transitionSparks();
+    cover.classList.add("hide");
+    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100);
   }
 
   function revealOnScroll() {
-    const items = document.querySelectorAll('.reveal');
-    items.forEach((item) => {
-      const top = item.getBoundingClientRect().top;
-      if (top < window.innerHeight - 70) item.classList.add('show');
+    document.querySelectorAll(".reveal").forEach((item) => {
+      if (item.getBoundingClientRect().top < window.innerHeight - 80) item.classList.add("show");
     });
   }
 
   function setupScratch() {
-    if (!canvas || !dateCard || revealed) return;
-    ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    if (!canvas || !box || !ctx || revealed) return;
+    const rect = box.getBoundingClientRect();
+    const inset = 18;
+    const width = Math.max(1, rect.width - inset * 2);
+    const height = Math.max(1, rect.height - inset * 2);
+    const scale = window.devicePixelRatio || 1;
 
-    const rect = dateCard.getBoundingClientRect();
-    const ratio = window.devicePixelRatio || 1;
-    canvas.width = Math.round(rect.width * ratio);
-    canvas.height = Math.round(rect.height * ratio);
-    canvas.style.width = rect.width + 'px';
-    canvas.style.height = rect.height + 'px';
-    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    canvas.width = Math.round(width * scale);
+    canvas.height = Math.round(height * scale);
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+    ctx.setTransform(scale, 0, 0, scale, 0, 0);
 
-    const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
-    gradient.addColorStop(0, '#8c6425');
-    gradient.addColorStop(0.22, '#f1d28b');
-    gradient.addColorStop(0.48, '#b9842d');
-    gradient.addColorStop(0.74, '#f7df9d');
-    gradient.addColorStop(1, '#8c6425');
-    ctx.globalCompositeOperation = 'source-over';
+    const gradient = ctx.createLinearGradient(0, 0, width, height);
+    gradient.addColorStop(0, "#8b6427");
+    gradient.addColorStop(0.28, "#f1d28a");
+    gradient.addColorStop(0.55, "#b9832e");
+    gradient.addColorStop(0.78, "#f8e0a0");
+    gradient.addColorStop(1, "#8b6427");
+    ctx.globalCompositeOperation = "source-over";
     ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, rect.width, rect.height);
-
-    ctx.fillStyle = 'rgba(255,255,255,.78)';
-    ctx.font = '700 13px Inter, Arial, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('SCRATCH TO REVEAL', rect.width / 2, rect.height / 2);
+    ctx.fillRect(0, 0, width, height);
+    ctx.fillStyle = "rgba(255,255,255,0.36)";
+    ctx.font = "700 13px Inter, Arial, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("SCRATCH TO REVEAL", width / 2, height / 2);
   }
 
-  function pointerPosition(event) {
+  function getPoint(e) {
     const rect = canvas.getBoundingClientRect();
-    const point = event.touches ? event.touches[0] : event;
-    return { x: point.clientX - rect.left, y: point.clientY - rect.top };
+    const p = e.touches ? e.touches[0] : e;
+    return { x: p.clientX - rect.left, y: p.clientY - rect.top };
   }
 
-  function scratch(event) {
-    if (!drawing || !ctx || !canvas || revealed) return;
-    event.preventDefault();
-    const point = pointerPosition(event);
-    ctx.globalCompositeOperation = 'destination-out';
+  function addSpark(x, y) {
+    const s = document.createElement("div");
+    s.className = "spark";
+    s.style.left = x + 18 + "px";
+    s.style.top = y + 18 + "px";
+    box.appendChild(s);
+    setTimeout(() => s.remove(), 850);
+  }
+
+  function scratch(e) {
+    if (!drawing || revealed || !ctx) return;
+    e.preventDefault();
+    const p = getPoint(e);
+    ctx.globalCompositeOperation = "destination-out";
     ctx.beginPath();
-    ctx.arc(point.x, point.y, 30, 0, Math.PI * 2);
+    ctx.arc(p.x, p.y, 26, 0, Math.PI * 2);
     ctx.fill();
-    scratchMoves += 1;
-    if (scratchMoves > 22) finishReveal();
+    if (scratchCount % 3 === 0) addSpark(p.x, p.y);
+    scratchCount++;
+    if (scratchCount > 55) finishReveal();
+  }
+
+  function launchSparkles() {
+    const types = ["flake", "circle", "petal", "star"];
+    for (let i = 0; i < 120; i++) {
+      setTimeout(() => {
+        const p = document.createElement("div");
+        const type = types[Math.floor(Math.random() * types.length)];
+        p.className = "luxPiece " + type;
+        if (type === "star") p.textContent = Math.random() > 0.5 ? "✦" : "✧";
+        p.style.left = Math.random() * 100 + "vw";
+        p.style.animationDuration = 4.8 + Math.random() * 4 + "s";
+        p.style.setProperty("--drift", -100 + Math.random() * 200 + "px");
+        p.style.setProperty("--rot", 360 + Math.random() * 540 + "deg");
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 10000);
+      }, i * 16);
+    }
   }
 
   function finishReveal() {
     if (revealed) return;
     revealed = true;
-    if (dateCard) dateCard.classList.add('revealed');
-    if (canvas) {
-      canvas.style.transition = 'opacity .7s ease';
-      canvas.style.opacity = '0';
-      setTimeout(() => { canvas.style.pointerEvents = 'none'; }, 720);
-    }
-    launchSparkles(70);
+    if (box) box.classList.add("revealed");
+    if (canvas) canvas.style.transition = "opacity .8s ease";
+    launchSparkles();
   }
 
-  function launchSparkles(count) {
-    const symbols = ['✦', '✧', '•'];
-    for (let i = 0; i < count; i += 1) {
-      setTimeout(() => {
-        const el = document.createElement('div');
-        el.className = 'sparkle';
-        el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-        el.style.left = Math.random() * 100 + 'vw';
-        el.style.fontSize = (11 + Math.random() * 12) + 'px';
-        el.style.animationDuration = (4 + Math.random() * 4) + 's';
-        el.style.setProperty('--drift', (-80 + Math.random() * 160) + 'px');
-        el.style.setProperty('--rot', (180 + Math.random() * 720) + 'deg');
-        document.body.appendChild(el);
-        setTimeout(() => el.remove(), 9000);
-      }, i * 25);
-    }
+  function initScratch() {
+    canvas = document.getElementById("scratchCanvas");
+    box = document.getElementById("designerDate");
+    if (!canvas || !box) return;
+    ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    canvas.addEventListener("mousedown", (e) => { drawing = true; scratch(e); });
+    canvas.addEventListener("mousemove", scratch);
+    window.addEventListener("mouseup", () => { drawing = false; });
+    canvas.addEventListener("touchstart", (e) => { drawing = true; scratch(e); }, { passive: false });
+    canvas.addEventListener("touchmove", scratch, { passive: false });
+    window.addEventListener("touchend", () => { drawing = false; });
+    window.addEventListener("resize", setupScratch);
+    setupScratch();
   }
 
-  function bindScratch() {
-    if (!canvas) return;
-    canvas.addEventListener('mousedown', (e) => { drawing = true; scratch(e); });
-    canvas.addEventListener('mousemove', scratch);
-    window.addEventListener('mouseup', () => { drawing = false; });
-    canvas.addEventListener('touchstart', (e) => { drawing = true; scratch(e); }, { passive: false });
-    canvas.addEventListener('touchmove', scratch, { passive: false });
-    window.addEventListener('touchend', () => { drawing = false; });
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    if (cover) cover.addEventListener('click', (e) => {
-      if (e.target && e.target.tagName === 'A') return;
-      openInvite();
-    });
-    if (openBtn) openBtn.addEventListener('click', (e) => { e.stopPropagation(); openInvite(); });
-    if (revealBtn) revealBtn.addEventListener('click', finishReveal);
-
+  document.addEventListener("DOMContentLoaded", () => {
+    const cover = document.getElementById("cover");
+    const openBtn = document.getElementById("openInviteBtn");
+    const revealBtn = document.getElementById("revealBtn");
+    if (cover) cover.addEventListener("click", openInvite);
+    if (openBtn) openBtn.addEventListener("click", (e) => { e.stopPropagation(); openInvite(); });
+    if (revealBtn) revealBtn.addEventListener("click", finishReveal);
     updateCountdown();
     setInterval(updateCountdown, 1000);
-
+    window.addEventListener("scroll", revealOnScroll, { passive: true });
     revealOnScroll();
-    window.addEventListener('scroll', revealOnScroll, { passive: true });
-    window.addEventListener('resize', () => { setupScratch(); revealOnScroll(); });
-
-    setupScratch();
-    bindScratch();
+    initScratch();
   });
 
   window.openInvite = openInvite;
   window.finishReveal = finishReveal;
 })();
+
+/* RSVP popup - Google Sheet submit + JSONP live count retrieval + editable response */
+document.addEventListener("DOMContentLoaded", () => {
+  const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzY9aNDRp4SMArkPDgAVMgvN9BLGt2CVyB4XAfKBTqcSSwZtqrLqlMiuTBSHGwzUNEz9w/exec";
+
+  const modal = document.getElementById("rsvpModal");
+  const openBtn = document.getElementById("openRsvpModal");
+  const form = document.getElementById("rsvpForm");
+  const formView = document.getElementById("rsvpFormView");
+  const thanksView = document.getElementById("rsvpThanksView");
+  const duplicateNote = document.getElementById("rsvpDuplicateNote");
+  const submittedTime = document.getElementById("rsvpSubmittedTime");
+
+  const yesCount = document.getElementById("rsvpYesCount");
+  const noCount = document.getElementById("rsvpNoCount");
+  const maybeCount = document.getElementById("rsvpMaybeCount");
+
+  function getSavedResponse() {
+    try { return JSON.parse(localStorage.getItem("weddingRsvpResponse") || "null"); }
+    catch { return null; }
+  }
+
+  function setCounts(counts) {
+    if (yesCount) yesCount.textContent = counts.yes ?? 0;
+    if (noCount) noCount.textContent = counts.no ?? 0;
+    if (maybeCount) maybeCount.textContent = counts.maybe ?? 0;
+  }
+
+  function loadCountsFromSheet() {
+    return new Promise((resolve) => {
+      const callbackName = "rsvpCountsCallback_" + Date.now() + "_" + Math.floor(Math.random() * 10000);
+      const scriptTag = document.createElement("script");
+
+      window[callbackName] = (data) => {
+        try {
+          if (data && data.result === "success" && data.counts) {
+            setCounts(data.counts);
+          }
+        } finally {
+          delete window[callbackName];
+          scriptTag.remove();
+          resolve();
+        }
+      };
+
+      scriptTag.onerror = () => {
+        delete window[callbackName];
+        scriptTag.remove();
+        resolve();
+      };
+
+      scriptTag.src = RSVP_ENDPOINT + "?action=counts&callback=" + encodeURIComponent(callbackName) + "&v=" + Date.now();
+      document.body.appendChild(scriptTag);
+    });
+  }
+
+  function fillSavedResponse() {
+    const saved = getSavedResponse();
+    const submitBtn = form?.querySelector(".rsvpSubmit");
+    if (!form || !submitBtn) return;
+
+    if (saved) {
+      const nameEl = document.getElementById("guestName");
+      if (nameEl) nameEl.value = saved.name || "";
+
+      const radios = form.querySelectorAll('input[name="attendance"]');
+      radios.forEach((radio) => {
+        radio.checked = radio.value === saved.attendance;
+      });
+
+      if (duplicateNote) duplicateNote.hidden = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Update Response";
+    } else {
+      if (duplicateNote) duplicateNote.hidden = true;
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Send Response";
+    }
+  }
+
+  async function openRsvp() {
+    if (!modal) return;
+    setCounts({ yes: "…", no: "…", maybe: "…" });
+    await loadCountsFromSheet();
+    fillSavedResponse();
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("rsvpLocked");
+    if (formView) formView.hidden = false;
+    if (thanksView) thanksView.hidden = true;
+    setTimeout(() => document.getElementById("guestName")?.focus(), 120);
+  }
+
+  function closeRsvp() {
+    if (!modal) return;
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("rsvpLocked");
+  }
+
+  async function sendToGoogleSheet(response) {
+    await fetch(RSVP_ENDPOINT, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(response)
+    });
+  }
+
+  if (openBtn) openBtn.addEventListener("click", openRsvp);
+  document.querySelectorAll("[data-close-rsvp]").forEach((item) => item.addEventListener("click", closeRsvp));
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && modal?.classList.contains("open")) closeRsvp();
+  });
+
+  if (form) {
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const submitBtn = form.querySelector(".rsvpSubmit");
+      const name = document.getElementById("guestName")?.value.trim();
+      const attendance = form.querySelector('input[name="attendance"]:checked')?.value;
+      const saved = getSavedResponse();
+
+      if (!name || !attendance) return;
+
+      const now = new Date();
+      const response = {
+        name,
+        attendance,
+        submittedAt: now.toISOString(),
+        submittedAtDisplay: now.toLocaleString(),
+        device: navigator.userAgent,
+        mode: saved ? "update" : "new",
+        previousName: saved?.name || "",
+        previousAttendance: saved?.attendance || ""
+      };
+
+      if (submitBtn) {
+        submitBtn.classList.add("loading");
+        submitBtn.disabled = true;
+        submitBtn.textContent = saved ? "Updating..." : "Sending...";
+      }
+
+      try {
+        await sendToGoogleSheet(response);
+
+        localStorage.setItem("weddingRsvpSubmitted", "true");
+        localStorage.setItem("weddingRsvpResponse", JSON.stringify({
+          name,
+          attendance,
+          submittedAt: response.submittedAt,
+          submittedAtDisplay: response.submittedAtDisplay
+        }));
+
+        setTimeout(loadCountsFromSheet, 1500);
+
+        if (submittedTime) submittedTime.textContent = (saved ? "Updated: " : "Submitted: ") + response.submittedAtDisplay;
+        if (formView) formView.hidden = true;
+        if (thanksView) thanksView.hidden = false;
+
+        if (submitBtn) {
+          submitBtn.classList.remove("loading");
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Update Response";
+        }
+      } catch (error) {
+        if (submitBtn) {
+          submitBtn.classList.remove("loading");
+          submitBtn.disabled = false;
+          submitBtn.textContent = saved ? "Update Response" : "Send Response";
+        }
+        alert("Submission failed. Please try again.");
+      }
+    });
+  }
+
+  loadCountsFromSheet();
+});

@@ -1,128 +1,154 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#f8efe2">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#F6EFE3" />
   <title>Ranjith & Sonaaly Wedding Invitation</title>
-  <meta name="description" content="Wedding invitation for Ranjith and Sonaaly">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=1000">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Inter:wght@300;400;500;600;700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=30100" />
 </head>
 <body>
   <div class="cover" id="cover" aria-label="Invitation cover">
-    <div class="cover__bg" aria-hidden="true"></div>
-    <div class="cover__card">
-      <div class="monogram" aria-label="Ranjith and Sonaaly monogram">
-        <span>R</span><i>&amp;</i><span>S</span>
-      </div>
+    <div class="coverGate coverGateLeft" aria-hidden="true"></div>
+    <div class="coverGate coverGateRight" aria-hidden="true"></div>
+    <div class="coverCard">
+      <div class="logo" aria-label="Ranjith and Sonaaly monogram"><span>R</span><i>&</i><span>S</span></div>
       <p class="eyebrow">Wedding Invitation</p>
       <h1>Ranjith <span>and</span> Sonaaly</h1>
-      <p class="cover__text">Together with their families invite you to celebrate their wedding.</p>
-      <button class="primary-btn" id="openInviteBtn" type="button">Open Invitation</button>
-      <p class="tap-note">Tap to begin</p>
+      <button class="primaryBtn" type="button" id="openInviteBtn">Open Invitation</button>
     </div>
   </div>
 
   <main id="mainContent">
     <section class="hero section" id="home">
-      <div class="ornament ornament--top" aria-hidden="true"></div>
-      <div class="hero__content reveal">
-        <div class="monogram monogram--small" aria-hidden="true">
-          <span>R</span><i>&amp;</i><span>S</span>
-        </div>
+      <div class="heroContent reveal">
+        <div class="logo smallLogo" aria-label="Ranjith and Sonaaly monogram"><span>R</span><i>&</i><span>S</span></div>
         <p class="eyebrow">Together with their families</p>
         <h2>Ranjith <span>and</span> Sonaaly</h2>
-        <p class="hero__subtitle">invite you to celebrate their wedding</p>
-        <div class="hero__date">
-          <strong>13 September 2026</strong>
-          <span>Sunday · 10:00 AM · Madurai</span>
+        <p class="intro">Invite you to celebrate their wedding</p>
+      </div>
+      <div class="heroPhoto" role="img" aria-label="Wedding photo"></div>
+    </section>
+
+    <section class="dateReveal section" id="reveal">
+      <div class="sectionInner reveal">
+        <h2 class="sectionTitle dateHeadline"><strong>It’s Happening</strong><span>The beginning of forever</span></h2>
+        <div class="scratchBox" id="designerDate">
+          <div class="dateCard">
+            <div class="month">September</div>
+            <div class="day">13</div>
+            <div class="year">2026</div>
+            <div class="time">Sunday</div>
+          </div>
+          <canvas id="scratchCanvas" aria-label="Scratch to reveal the wedding date"></canvas>
         </div>
       </div>
     </section>
 
-    <section class="date-section section" id="reveal">
-      <div class="section-head reveal">
-        <p class="eyebrow">Save the date</p>
-        <h2>Wedding Day</h2>
-      </div>
-
-      <div class="date-card reveal" id="dateCard">
-        <div class="date-card__inner">
-          <p class="month">September</p>
-          <p class="day">13</p>
-          <p class="year">2026</p>
-          <p class="time">Sunday · 10:00 AM</p>
+    <section class="countSection section countdownPhotoBg" id="countdown">
+      <div class="sectionInner reveal">
+        <h2 class="sectionTitle countdownMainTitle">Countdown</h2>
+        <p class="eyebrow countdownSubTitle">The celebration begins in</p>
+        <div class="countdown" aria-label="Wedding countdown">
+          <div class="countItem"><strong id="days">0</strong><span>Days</span></div>
+          <div class="countItem"><strong id="hours">0</strong><span>Hours</span></div>
+          <div class="countItem"><strong id="minutes">0</strong><span>Minutes</span></div>
+          <div class="countItem"><strong id="seconds">0</strong><span>Seconds</span></div>
         </div>
-        <canvas id="scratchCanvas" aria-label="Scratch to reveal the date"></canvas>
-      </div>
-      <button class="text-btn reveal" id="revealDateBtn" type="button">Reveal date</button>
-    </section>
-
-    <section class="count-section section" id="countdown">
-      <div class="section-head reveal">
-        <p class="eyebrow">The celebration begins in</p>
-        <h2>Countdown</h2>
-      </div>
-      <div class="countdown reveal" aria-label="Wedding countdown">
-        <div class="count-box"><strong id="days">0</strong><span>Days</span></div>
-        <div class="count-box"><strong id="hours">0</strong><span>Hours</span></div>
-        <div class="count-box"><strong id="minutes">0</strong><span>Minutes</span></div>
-        <div class="count-box"><strong id="seconds">0</strong><span>Seconds</span></div>
       </div>
     </section>
 
     <section class="events section" id="events">
-      <div class="section-head reveal">
-        <p class="eyebrow">Wedding details</p>
-        <h2>Events</h2>
-      </div>
-      <div class="event-list">
-        <article class="event-card reveal">
-          <p class="event-card__tag">Morning</p>
-          <h3>Wedding</h3>
-          <p><strong>Sunday, 13 September 2026</strong></p>
-          <p>10:00 AM</p>
-          <p>Dhuvathasantham Convention Centre<br>Madurai</p>
-          <a class="secondary-btn" href="https://maps.app.goo.gl/kYjnUuHdCrsawFqk9" target="_blank" rel="noopener">View location</a>
-        </article>
-
-        <article class="event-card reveal">
-          <p class="event-card__tag">Evening</p>
-          <h3>Reception</h3>
-          <p><strong>Sunday, 13 September 2026</strong></p>
-          <p>6:30 PM onwards</p>
-          <p>Dhuvathasantham Convention Centre<br>Madurai</p>
-          <a class="secondary-btn" href="https://maps.app.goo.gl/kYjnUuHdCrsawFqk9" target="_blank" rel="noopener">View location</a>
-        </article>
+      <div class="sectionInner reveal">
+        <p class="eyebrow">Wedding Details</p>
+        <h2 class="sectionTitle">Events</h2>
+        <div class="eventGrid">
+          <article class="eventCard">
+            <h3>Wedding</h3>
+            <p><strong>Sunday, 13 September 2026</strong></p>
+            <p>10:00 AM</p>
+            <p>Dhuvathasantham Convention Centre<br />Madurai</p>
+            <a class="linkBtn" href="https://maps.app.goo.gl/kYjnUuHdCrsawFqk9" target="_blank" rel="noopener">View Location</a>
+          </article>
+          <article class="eventCard">
+            <h3>Reception</h3>
+            <p><strong>Sunday, 13 September 2026</strong></p>
+            <p>6:30 PM onwards</p>
+            <p>Dhuvathasantham Convention Centre<br />Madurai</p>
+            <a class="linkBtn" href="https://maps.app.goo.gl/kYjnUuHdCrsawFqk9" target="_blank" rel="noopener">View Location</a>
+          </article>
+        </div>
       </div>
     </section>
 
     <section class="venue section" id="venue">
-      <div class="venue-card reveal">
+      <div class="venueContent reveal">
         <p class="eyebrow">Venue</p>
-        <h2>Dhuvathasantham Convention Centre</h2>
+        <h2 class="sectionTitle">Dhuvathasantham<br />Convention Centre</h2>
         <p>Madurai, Tamil Nadu</p>
-        <a class="primary-btn" href="https://maps.app.goo.gl/kYjnUuHdCrsawFqk9" target="_blank" rel="noopener">Open map</a>
+        <a class="linkBtn" href="https://maps.app.goo.gl/kYjnUuHdCrsawFqk9" target="_blank" rel="noopener">Open Map</a>
       </div>
     </section>
 
+    
     <section class="rsvp section" id="rsvp">
-      <div class="rsvp-card reveal">
-        <p class="eyebrow">Kindly confirm</p>
-        <h2>RSVP</h2>
-        <p>Please confirm your presence through WhatsApp.</p>
-        <a class="primary-btn" href="https://wa.me/919585653566?text=Congratulations%20Ranjith%20and%20Sonaaly.%20I%20will%20attend%20the%20wedding." target="_blank" rel="noopener">WhatsApp RSVP</a>
+      <div class="rsvpCard reveal">
+        <p class="eyebrow presenceLine">With Love, We Expect</p>
+        <h2 class="sectionTitle">Your Presence</h2>
+        <p>We are looking forward to celebrating our special day with you.</p>
+        <button class="primaryBtn" type="button" id="openRsvpModal">Confirm Presence</button>
       </div>
     </section>
+
+    <div class="rsvpModal" id="rsvpModal" aria-hidden="true">
+      <div class="rsvpModalBackdrop" data-close-rsvp></div>
+      <div class="rsvpModalCard" role="dialog" aria-modal="true" aria-labelledby="rsvpModalTitle">
+        <button class="rsvpClose" type="button" aria-label="Close RSVP" data-close-rsvp>&times;</button>
+
+        <div class="rsvpFormView" id="rsvpFormView">
+          <p class="eyebrow presenceLine">With Love, We Expect</p>
+          <h2 id="rsvpModalTitle">Your Presence</h2>
+          <form id="rsvpForm">
+            <label class="rsvpField">
+              <span>Your Name</span>
+              <input type="text" id="guestName" name="guestName" placeholder="Enter your name" required />
+            </label>
+
+            <div class="rsvpOptions" role="radiogroup" aria-label="Attendance confirmation">
+              <p>Will you bless us with your presence?</p>
+              <label><input type="radio" name="attendance" value="Yes, I'll attend" required /><span>Yes, I'll attend</span></label>
+              <label><input type="radio" name="attendance" value="No, I won't be able to attend" /><span>No, I won't be able to attend</span></label>
+              <label><input type="radio" name="attendance" value="Not sure yet" /><span>Not sure yet</span></label>
+            </div>
+
+            <button class="primaryBtn rsvpSubmit" type="submit">Send Response</button>
+          </form>
+
+          <div class="rsvpSummary" id="rsvpSummary" aria-label="RSVP response summary">
+            <div><strong id="rsvpYesCount">0</strong><span>Yes</span></div>
+            <div><strong id="rsvpNoCount">0</strong><span>No</span></div>
+            <div><strong id="rsvpMaybeCount">0</strong><span>Not Sure</span></div>
+          </div>
+          <p class="rsvpDuplicateNote" id="rsvpDuplicateNote" hidden>You already submitted from this device. You can update your response below.</p>
+        </div>
+
+        <div class="rsvpThanksView" id="rsvpThanksView" hidden>
+          <p class="eyebrow">Thank You</p>
+          <h2>Thank You ❤️</h2>
+          <p>Your response has been received.</p>
+          <p>Your presence means a lot to us.</p>
+          <p class="rsvpSubmittedTime" id="rsvpSubmittedTime"></p>
+          <button class="primaryBtn" type="button" data-close-rsvp>Close</button>
+        </div>
+      </div>
+    </div>
+
   </main>
 
-  <footer class="footer">
-    <p>Ranjith Rajagopal &amp; Sonaaly Sudharsanaa</p>
-  </footer>
-
-  <script src="script.js?v=1000"></script>
+  <footer>Ranjith Rajagopal &amp; Sonaaly Sudharsanaa</footer>
+  <script src="script.js?v=30100"></script>
 </body>
 </html>
