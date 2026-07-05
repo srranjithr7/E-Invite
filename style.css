@@ -25,16 +25,7 @@ body {
   font-family:Inter, Arial, sans-serif;
   -webkit-font-smoothing:antialiased;
 }
-body::after {
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:-1;
-  opacity:.13;
-  background-image:linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size:64px 64px;
-}
+body::after { content:none !important; display:none !important; }
 a { color:inherit; }
 button, a { -webkit-tap-highlight-color:transparent; }
 
@@ -1446,62 +1437,176 @@ body.rsvpLocked{overflow:hidden;}
   }
 }
 
-/* CLEAN FIX: venue text bottom overlay + logo centred. No full-page line added. */
 
-/* Venue image is now an actual image layer inside the venue section. */
+/* === v30120: keep reference single centre cover line + requested venue positioning === */
+.presenceLine {
+  white-space: normal !important;
+  letter-spacing: .26em !important;
+}
+
+.cover .coverGateLeft::before,
+.cover .coverGateRight::before {
+  content: none !important;
+  display: none !important;
+}
+
 .venue {
   position: relative !important;
-  min-height: 86svh !important;
-  display: block !important;
-  padding: 0 !important;
-  overflow: hidden !important;
+  display: flex !important;
+  align-items: flex-end !important;
+}
+.venueContent {
+  width: 100% !important;
+  padding-bottom: 40px !important;
+}
+@media (max-width: 760px) {
+  .venueContent {
+    padding-bottom: 30px !important;
+  }
 }
 
+
+/* === final targeted fixes: no unwanted left-centre decoration, venue text at bottom, exact centre cover slit === */
+
+/* Remove the annoying static decorative cluster that was sitting on the left/centre of the image area. */
+.heroPhoto::before,
+.heroPhoto::after {
+  display: none !important;
+  content: none !important;
+  opacity: 0 !important;
+}
+
+/* Keep the venue photo as the full background, but anchor all venue text to the bottom of the image. */
+.venue {
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: center !important;
+  min-height: 88vh !important;
+  padding: 80px 18px 38px !important;
+}
+
+.venueContent {
+  align-self: flex-end !important;
+  margin-top: auto !important;
+  margin-bottom: 0 !important;
+  transform: none !important;
+}
+
+@media (max-width: 760px) {
+  .venue {
+    min-height: 78vh !important;
+    padding: 64px 14px 30px !important;
+    align-items: flex-end !important;
+  }
+}
+
+/* Make the front-page centre line one exact slit at 50%, between R and S. */
+.coverGate {
+  width: 50% !important;
+}
+
+.cover .coverGateLeft::after {
+  display: none !important;
+  content: none !important;
+}
+
+.cover .coverGateRight::after {
+  left: 0 !important;
+  width: 1.5px !important;
+  opacity: .72 !important;
+  transform: translateX(-.75px) !important;
+}
+
+/* FINAL RESET FIX - no full-page vertical line, venue uses folder image, venue text bottom */
+body::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+/* Remove any injected venue photo layer. The venue image must come from folder file below. */
 .venuePhoto {
-  position: absolute !important;
-  inset: 0 !important;
-  min-height: 100% !important;
-  width: 100% !important;
+  display: none !important;
+}
+
+/* Venue uses the folder image: venue-dhuvathasantham.png */
+.venue {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+
+  width: calc(100% - 28px) !important;
+  min-height: 88vh !important;
+  margin: 18px auto !important;
+  border-radius: 36px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+
+  padding: 0 14px 34px !important;
+
+  background-image:
+    linear-gradient(180deg, rgba(246,239,227,.10), rgba(246,239,227,.34)),
+    url("venue-dhuvathasantham.png") !important;
   background-size: cover !important;
   background-position: center center !important;
-  z-index: 0 !important;
+  background-repeat: no-repeat !important;
 }
 
-/* Bottom overlay: text sits at bottom of venue image, not centre. */
-.venueContent {
+/* Keep image clear; only soft readability overlay, no underline */
+.venue::before {
+  content: "" !important;
   position: absolute !important;
-  left: 50% !important;
-  right: auto !important;
-  top: auto !important;
-  bottom: 26px !important;
-  transform: translateX(-50%) !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  border-radius: inherit !important;
+  background: linear-gradient(180deg, rgba(246,239,227,.08) 0%, rgba(246,239,227,.18) 55%, rgba(246,239,227,.52) 100%) !important;
+}
+
+.venueContent {
+  position: relative !important;
   z-index: 2 !important;
 
-  width: min(94vw, 720px) !important;
-  max-width: 720px !important;
-  margin: 0 !important;
-  padding: 18px 12px !important;
-  text-align: center !important;
+  width: min(96vw, 860px) !important;
+  max-width: 860px !important;
+  margin: 0 auto !important;
+  padding: 0 8px !important;
 
   display: block !important;
+  text-align: center !important;
+  align-self: center !important;
+
   background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  transform: none !important;
 }
 
-/* Stop "Convention Centre" from breaking one letter to next line. */
-.venueContent .sectionTitle {
-  white-space: nowrap !important;
-  word-break: keep-all !important;
-  overflow-wrap: normal !important;
-  hyphens: none !important;
-  font-size: clamp(34px, 8.6vw, 60px) !important;
-  line-height: .94 !important;
-  max-width: none !important;
-}
-
+.venueContent .eyebrow,
 .venueContent p {
+  color: #071f1c !important;
+  text-shadow: 0 2px 14px rgba(246,239,227,.95), 0 0 2px rgba(246,239,227,1) !important;
+}
+
+.venueContent .sectionTitle {
+  color: #071f1c !important;
+  text-shadow: 0 3px 18px rgba(246,239,227,.95), 0 0 2px rgba(246,239,227,1) !important;
+  -webkit-text-stroke: 0 !important;
+
+  font-size: clamp(2rem, 8.2vw, 4.4rem) !important;
+  line-height: .94 !important;
+  letter-spacing: .005em !important;
+
+  width: 100% !important;
   max-width: none !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+  white-space: nowrap !important;
+  overflow-wrap: normal !important;
+  word-break: keep-all !important;
+  hyphens: none !important;
 }
 
 .venueContent .sectionTitle::after,
@@ -1510,58 +1615,78 @@ body.rsvpLocked{overflow:hidden;}
   content: none !important;
 }
 
-/* Desktop must also use the same bottom overlay, not the old two-column centred venue layout. */
-@media (min-width: 760px) {
+@media (max-width: 760px) {
   .venue {
-    min-height: 86vh !important;
-    display: block !important;
-    grid-template-columns: none !important;
-  }
-  .venuePhoto {
-    position: absolute !important;
-    inset: 0 !important;
-    min-height: 100% !important;
+    width: calc(100% - 20px) !important;
+    min-height: 78vh !important;
+    margin: 14px auto !important;
+    border-radius: 28px !important;
+    padding: 0 10px 28px !important;
   }
   .venueContent {
-    position: absolute !important;
-    left: 50% !important;
-    bottom: 36px !important;
-    transform: translateX(-50%) !important;
-    align-items: center !important;
-    text-align: center !important;
-    padding: 18px 12px !important;
+    width: 96vw !important;
+    max-width: 96vw !important;
+    padding: 0 4px !important;
+  }
+  .venueContent .sectionTitle {
+    font-size: clamp(1.85rem, 7.7vw, 3rem) !important;
+    line-height: .94 !important;
+    white-space: nowrap !important;
   }
 }
 
-/* Logo: keep the circular monogram centred and place R/S evenly around the exact middle. */
+/* Front cover: no added full-page line; keep logo/card truly centred. */
+.coverCard {
+  left: auto !important;
+  right: auto !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  transform-origin: center center !important;
+}
+
 .cover .logo {
   margin-left: auto !important;
   margin-right: auto !important;
-  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
 }
 
+/* Make gate split exactly 50/50 and remove thick seam/shadow that looked like a full vertical line. */
+.coverGate {
+  width: 50% !important;
+}
+.coverGateLeft {
+  left: 0 !important;
+  box-shadow: none !important;
+}
+.coverGateRight {
+  right: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Keep monogram letters balanced inside the circle; do not push the logo right. */
 .cover .logo span:first-child {
-  left: 25% !important;
+  left: 27px !important;
   right: auto !important;
-  transform: translateX(-50%) !important;
+  transform: none !important;
 }
-
 .cover .logo span:last-child {
-  left: 75% !important;
-  right: auto !important;
-  transform: translateX(-50%) !important;
+  right: 25px !important;
+  left: auto !important;
+  transform: none !important;
 }
-
 .cover .logo i {
   left: 50% !important;
   right: auto !important;
   transform: translateX(-50%) !important;
 }
 
-/* Remove any bad added centre-line element if an older browser cached it. */
+/* Kill any bad line elements/classes from previous generated packages if cached. */
 .inviteCenterLine,
 .centerLine,
-.coverCenterLine {
+.coverCenterLine,
+.logoCenterLine {
   display: none !important;
   content: none !important;
 }
