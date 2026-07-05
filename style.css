@@ -29,7 +29,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: Inter, Arial, sans-serif;
-  overflow-x: hidden;
+  overflow-x: auto;
 }
 
 body::before {
