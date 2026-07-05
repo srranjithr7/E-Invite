@@ -25,7 +25,7 @@ body {
   font-family:Inter, Arial, sans-serif;
   -webkit-font-smoothing:antialiased;
 }
-body::after { content:none !important; display:none !important; }
+body::after { content:none !important; display:none !important; background:none !important; }
 a { color:inherit; }
 button, a { -webkit-tap-highlight-color:transparent; }
 
@@ -1517,19 +1517,21 @@ body.rsvpLocked{overflow:hidden;}
   transform: translateX(-.75px) !important;
 }
 
-/* FINAL RESET FIX - no full-page vertical line, venue uses folder image, venue text bottom */
+/* === FINAL HTML FIX: venue image from local folder, text at bottom, no white texture, no full-page line === */
+
+/* Remove the visible full-page grid/vertical line after opening */
 body::after {
   content: none !important;
   display: none !important;
   background: none !important;
 }
 
-/* Remove any injected venue photo layer. The venue image must come from folder file below. */
+/* Do not use any injected/other venue image layer */
 .venuePhoto {
   display: none !important;
 }
 
-/* Venue uses the folder image: venue-dhuvathasantham.png */
+/* Use the real venue image file from the same folder as the HTML/CSS */
 .venue {
   position: relative !important;
   overflow: hidden !important;
@@ -1545,35 +1547,30 @@ body::after {
   align-items: center !important;
   justify-content: flex-end !important;
 
-  padding: 0 14px 34px !important;
+  padding: 0 16px 34px !important;
 
-  background-image:
-    linear-gradient(180deg, rgba(246,239,227,.10), rgba(246,239,227,.34)),
-    url("venue-dhuvathasantham.png") !important;
+  background-image: url("venue-dhuvathasantham.png") !important;
   background-size: cover !important;
   background-position: center center !important;
   background-repeat: no-repeat !important;
 }
 
-/* Keep image clear; only soft readability overlay, no underline */
+/* No white texture/card behind venue text */
 .venue::before {
-  content: "" !important;
-  position: absolute !important;
-  inset: 0 !important;
-  z-index: 0 !important;
-  pointer-events: none !important;
-  border-radius: inherit !important;
-  background: linear-gradient(180deg, rgba(246,239,227,.08) 0%, rgba(246,239,227,.18) 55%, rgba(246,239,227,.52) 100%) !important;
+  content: none !important;
+  display: none !important;
+  background: none !important;
 }
 
+/* Venue text bottom overlay only */
 .venueContent {
   position: relative !important;
   z-index: 2 !important;
 
-  width: min(96vw, 860px) !important;
-  max-width: 860px !important;
+  width: min(96vw, 920px) !important;
+  max-width: 920px !important;
   margin: 0 auto !important;
-  padding: 0 8px !important;
+  padding: 0 !important;
 
   display: block !important;
   text-align: center !important;
@@ -1586,19 +1583,20 @@ body::after {
   transform: none !important;
 }
 
-.venueContent .eyebrow,
-.venueContent p {
-  color: #071f1c !important;
-  text-shadow: 0 2px 14px rgba(246,239,227,.95), 0 0 2px rgba(246,239,227,1) !important;
+/* Bigger text, transparent over image */
+.venueContent .eyebrow {
+  color: #D4AF6A !important;
+  text-shadow: 0 2px 8px rgba(0,0,0,.85) !important;
+  margin-bottom: 10px !important;
 }
 
 .venueContent .sectionTitle {
-  color: #071f1c !important;
-  text-shadow: 0 3px 18px rgba(246,239,227,.95), 0 0 2px rgba(246,239,227,1) !important;
+  color: #D4AF6A !important;
+  text-shadow: 0 3px 10px rgba(0,0,0,.90) !important;
   -webkit-text-stroke: 0 !important;
 
-  font-size: clamp(2rem, 8.2vw, 4.4rem) !important;
-  line-height: .94 !important;
+  font-size: clamp(2.25rem, 8.5vw, 5.4rem) !important;
+  line-height: .92 !important;
   letter-spacing: .005em !important;
 
   width: 100% !important;
@@ -1607,6 +1605,22 @@ body::after {
   overflow-wrap: normal !important;
   word-break: keep-all !important;
   hyphens: none !important;
+  margin-bottom: 8px !important;
+}
+
+.venueContent p {
+  color: #F1D28A !important;
+  text-shadow: 0 2px 8px rgba(0,0,0,.9) !important;
+  font-size: clamp(1.05rem, 3.2vw, 1.55rem) !important;
+  font-weight: 700 !important;
+  margin-bottom: 18px !important;
+}
+
+.venueContent .linkBtn {
+  background: rgba(14,47,43,.62) !important;
+  color: #fff !important;
+  border-color: rgba(212,175,106,.58) !important;
+  box-shadow: none !important;
 }
 
 .venueContent .sectionTitle::after,
@@ -1615,6 +1629,7 @@ body::after {
   content: none !important;
 }
 
+/* Mobile: keep bottom placement, avoid last-letter wrapping */
 @media (max-width: 760px) {
   .venue {
     width: calc(100% - 20px) !important;
@@ -1622,72 +1637,33 @@ body::after {
     margin: 14px auto !important;
     border-radius: 28px !important;
     padding: 0 10px 28px !important;
+    background-position: center center !important;
   }
+
   .venueContent {
     width: 96vw !important;
     max-width: 96vw !important;
-    padding: 0 4px !important;
   }
+
   .venueContent .sectionTitle {
-    font-size: clamp(1.85rem, 7.7vw, 3rem) !important;
-    line-height: .94 !important;
+    font-size: clamp(1.75rem, 7.4vw, 3.25rem) !important;
+    line-height: .92 !important;
     white-space: nowrap !important;
   }
 }
 
-/* Front cover: no added full-page line; keep logo/card truly centred. */
-.coverCard {
-  left: auto !important;
-  right: auto !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  transform-origin: center center !important;
-}
-
-.cover .logo {
-  margin-left: auto !important;
-  margin-right: auto !important;
-  left: auto !important;
-  right: auto !important;
-  transform: none !important;
-}
-
-/* Make gate split exactly 50/50 and remove thick seam/shadow that looked like a full vertical line. */
-.coverGate {
-  width: 50% !important;
-}
-.coverGateLeft {
-  left: 0 !important;
-  box-shadow: none !important;
-}
-.coverGateRight {
-  right: 0 !important;
-  box-shadow: none !important;
-}
-
-/* Keep monogram letters balanced inside the circle; do not push the logo right. */
-.cover .logo span:first-child {
-  left: 27px !important;
-  right: auto !important;
-  transform: none !important;
-}
-.cover .logo span:last-child {
-  right: 25px !important;
-  left: auto !important;
-  transform: none !important;
-}
-.cover .logo i {
-  left: 50% !important;
-  right: auto !important;
-  transform: translateX(-50%) !important;
-}
-
-/* Kill any bad line elements/classes from previous generated packages if cached. */
+/* Prevent old generated centre-line classes from showing */
 .inviteCenterLine,
 .centerLine,
 .coverCenterLine,
 .logoCenterLine {
   display: none !important;
   content: none !important;
+}
+
+/* Do not show gate seam as a full vertical line */
+.coverGateLeft,
+.coverGateRight {
+  box-shadow: none !important;
 }
 
